@@ -77,7 +77,22 @@ def write_file(file_name, lst):
         f_writer.writeheader()
         f_writer.writerows(res)
 
+def copy_file(file_name, new_file_name, row):
+
+    if not exists(new_file_name):
+        create_file(new_file_name)
+
+    res = read_file(file_name)
+    result = list(res[row-1].values())
+
+    print(result)
+
+    write_file(new_file_name, result)
+
+
 file_name = "phone.csv"
+new_file_name = "new_phone.csv"
+
 
 def main():
     while True:
@@ -93,5 +108,7 @@ def main():
                 print("Файл отсутствует - создайте его")
                 continue
             print(*read_file(file_name))
+        elif command == 'c':
+            copy_file(file_name, new_file_name, 2)
 
 main()
